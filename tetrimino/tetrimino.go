@@ -14,14 +14,16 @@ type Cell struct {
 	X, Y int
 }
 
+// 新しいテトリミノを生成する関数
 func NewTetrimino(shape [][]bool) *Tetrimino {
 	return &Tetrimino{
 		Shape: shape,
-		X:     3,
-		Y:     0,
+		X:     3,// 初期位置
+		Y:     0,// 初期位置
 	}
 }
 
+// ランダムな形のテトリミノを生成する関数
 func NewRandomTetrimino() *Tetrimino {
 	rand.Seed(time.Now().UnixNano())
 	shapes := [][][]bool{
@@ -30,6 +32,7 @@ func NewRandomTetrimino() *Tetrimino {
 	return NewTetrimino(shapes[rand.Intn(len(shapes))])
 }
 
+// テトリミノが占めるセルの座標を返す関数
 func (t *Tetrimino) Cells() []Cell {
 	cells := []Cell{}
 
@@ -43,19 +46,22 @@ func (t *Tetrimino) Cells() []Cell {
 
 	return cells
 }
-
+// テトリミノを左に移動する関数
 func (t *Tetrimino) MoveLeft() {
 	t.X--
 }
 
+//　テトリミノを右に移動する関数
 func (t *Tetrimino) MoveRight() {
 	t.X++
 }
 
+// テトリミノを下に移動する関数
 func (t *Tetrimino) MoveDown() {
 	t.Y++
 }
 
+// テトリミノを回転させる関数
 func (t *Tetrimino) Rotate() {
 	newShape := make([][]bool, len(t.Shape[0]))
 	for i := range newShape {
@@ -71,6 +77,7 @@ func (t *Tetrimino) Rotate() {
 	t.Shape = newShape
 }
 
+// テトリミノを複製する関数
 func (t *Tetrimino) Clone() *Tetrimino {
 	shape := make([][]bool, len(t.Shape))
 	for i := range t.Shape {
@@ -85,6 +92,7 @@ func (t *Tetrimino) Clone() *Tetrimino {
 	}
 }
 
+// 各種テトリミノの形状を定義
 var Shapes = struct {
 	I, O, T, S, Z, J, L [][]bool
 }{

@@ -2,11 +2,11 @@ package renderer
 
 import (
 	"github.com/nsf/termbox-go"
-
 	"github.com/YuNaga224/GoTetris/board"
 	"github.com/YuNaga224/GoTetris/tetrimino"
 )
 
+// 描画の際に使用するオフセット座標を持つ構造体
 type Renderer struct {
 	OffsetX, OffsetY int
 }
@@ -18,6 +18,7 @@ func NewRenderer() *Renderer {
 	}
 }
 
+// ゲームボードを描画する関数
 func (r *Renderer) DrawBoard(b *board.Board) {
 	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
 
@@ -35,9 +36,12 @@ func (r *Renderer) DrawBoard(b *board.Board) {
 	}
 }
 
+// 現在のテトリミノを描画する関数
 func (r *Renderer) DrawTetrimino(t *tetrimino.Tetrimino) {
 	for _, cell := range t.Cells() {
 		termbox.SetCell(r.OffsetX+cell.X*2, r.OffsetY+cell.Y, '█', termbox.ColorWhite, termbox.ColorWhite)
 		termbox.SetCell(r.OffsetX+cell.X*2+1, r.OffsetY+cell.Y, '█', termbox.ColorWhite, termbox.ColorWhite)
 	}
 }
+
+
